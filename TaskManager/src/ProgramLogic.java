@@ -1,8 +1,11 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramLogic {
     private List<String> activeTasks;  // list that holds tasks currently active
+    private final String FILE_NAME = "tasks.txt";
 
     public ProgramLogic() {
         this.activeTasks = new ArrayList<>();
@@ -18,7 +21,21 @@ public class ProgramLogic {
             return;
         }
         activeTasks.add(task);
+        saveToFile();
     }
+
+    // writing the tasks in active tasks list to a file
+    public void saveToFile() {
+        try (FileWriter writer = new FileWriter(FILE_NAME)){
+            for (String t : activeTasks) {
+                writer.write(t);
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving tasks: " + e.getMessage());
+        }
+    }
+
+    // loading the tasks in text file whenever program runs
 
     // remove a task
     public void removeTask(int taskNumber) {
