@@ -24,4 +24,16 @@ public class UserInterface {
             processCommand(command);
         }
     }
+
+    public void processCommand(String command) {
+        if (command.equals("1")) {
+            add();   // method that takes care of updating task list
+        } else if (command.equals("2")) {
+            remove();
+        }else if (command.equals("3")) {
+            printTasks();
+        } else {
+            System.out.println("Invalid command. Please try again.");
+        }
+    }
 }
