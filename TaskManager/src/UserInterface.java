@@ -42,6 +42,7 @@ public class UserInterface {
         System.out.println("What do you want to do?");
         String input = scanner.nextLine();
         taskManager.addTask(input);
+        System.out.println();
     }
 
     // remove a task
@@ -49,10 +50,12 @@ public class UserInterface {
         System.out.println("Which task do you want to delete?");
         int input = Integer.valueOf(scanner.nextLine());
         taskManager.removeTask(input);
+        System.out.println();
     }
 
     // show all tasks
     public void print() {
         taskManager.printTasks();
+        System.out.println();
     }
 }

@@ -51,14 +51,21 @@ public class ProgramLogic {
         } catch (Exception e) {
             System.out.println("Unable to load previous task. Either no tasks exist or some other error.");
         }
+        System.out.println("Here is your to-do list:");
+        printTasks();
+        System.out.println();
     }
 
     // remove a task
+    // also add way to remove the task from file
     public void removeTask(int taskNumber) {
-        if (activeTasks.get(taskNumber-1) == null) {
+        int index = taskNumber-1;
+        if (taskNumber < activeTasks.size() || taskNumber > activeTasks.size()) {
             System.out.println("No such task in your to-do list.");
+            return;
         }
-        activeTasks.remove(taskNumber-1);
+        activeTasks.remove(index);
+        saveToFile();
 
     }
 
@@ -72,5 +79,6 @@ public class ProgramLogic {
         for (int i = 0; i < activeTasks.size(); i++) {
             System.out.println((i+1) + ". " + activeTasks.get(i) );
         }
+
     }
 }
