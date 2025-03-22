@@ -31,9 +31,28 @@ public class UserInterface {
         } else if (command.equals("2")) {
             remove();
         }else if (command.equals("3")) {
-            printTasks();
+            print();
         } else {
             System.out.println("Invalid command. Please try again.");
         }
+    }
+
+    // add a command to task manager
+    public void add() {
+        System.out.println("What do you want to do?");
+        String input = scanner.nextLine();
+        taskManager.addTask(input);
+    }
+
+    // remove a task
+    public void remove() {
+        System.out.println("Which task do you want to delete?");
+        String input = scanner.nextLine();
+        taskManager.removeTask(input);
+    }
+
+    // show all tasks
+    public void print() {
+        taskManager.printTasks();
     }
 }
