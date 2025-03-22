@@ -29,7 +29,10 @@ public class ProgramLogic {
     }
 
     // print all active tasks
+    // add numbering to tasks
     public void printTasks() {
-        activeTasks.stream().forEach(t -> System.out.println(t));
+        for (int i = 0; i < activeTasks.size(); i++) {
+            System.out.println((i+1) + ". " + activeTasks.get(i) );
+        }
     }
 }
