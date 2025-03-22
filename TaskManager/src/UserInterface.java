@@ -47,7 +47,7 @@ public class UserInterface {
     // remove a task
     public void remove() {
         System.out.println("Which task do you want to delete?");
-        String input = scanner.nextLine();
+        int input = Integer.valueOf(scanner.nextLine());
         taskManager.removeTask(input);
     }
 

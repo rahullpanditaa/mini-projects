@@ -21,11 +21,12 @@ public class ProgramLogic {
     }
 
     // remove a task
-    public void removeTask(String task) {
-        if (activeTasks.contains(task)) {
-            activeTasks.remove(task);
+    public void removeTask(int taskNumber) {
+        if (taskNumber - 1 <= activeTasks.size() || taskNumber - 1 >= activeTasks.size()) {
+            System.out.println("No such task in your to-do list.");
         }
-        System.out.println("No such task in your to-do list.");
+        activeTasks.remove(taskNumber-1);
+
     }
 
     // print all active tasks
