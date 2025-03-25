@@ -31,5 +31,9 @@ public class Task {
         System.out.println("Invalid priority type given: Please select a valid option.");
     }
 
+    public String toString() {
+        return getTaskDescription() + (isTaskCompleted() ? " - Finished :)" : " - Incomplete :(") + " (Priority: " + getTaskPriority() + ").";
+    }
+
 
 }
