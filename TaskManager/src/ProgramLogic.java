@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ProgramLogic {
-    private List<String> activeTasks;  // list that holds tasks currently active
+    private List<Task> activeTasks;  // list that holds tasks currently active
     private final String FILE_NAME = "tasks.txt";
 
     public ProgramLogic() {
-        this.activeTasks = new ArrayList<String>();
+        this.activeTasks = new ArrayList<>();
         loadTasksFromFile();
     }
 
@@ -19,8 +19,8 @@ public class ProgramLogic {
     }
 
     // adding tasks to list of active tasks
-    public void addTask(String task) {
-        if (activeTasks.contains(task)) {
+    public void addTask(Task task) {
+        if (activeTasks.contains(task)) {   // checks whether task description is same
             return;
         }
         activeTasks.add(task);
@@ -30,7 +30,7 @@ public class ProgramLogic {
     // writing the tasks in active tasks list to a file
     public void saveToFile() {
         try (FileWriter writer = new FileWriter(FILE_NAME)){
-            for (String t : activeTasks) {
+            for (Task t : activeTasks) {
                 writer.write(String.valueOf(t));
                 writer.write("\n");
             }
@@ -43,7 +43,7 @@ public class ProgramLogic {
     public void loadTasksFromFile() {
         try (Scanner reader = new Scanner(Paths.get(FILE_NAME))) {
             while (reader.hasNextLine()) {
-                activeTasks.add(reader.nextLine());
+                activeTasks.add(new Task(reader.nextLine()));
             }
 
         } catch (Exception e) {
@@ -82,6 +82,32 @@ public class ProgramLogic {
         for (int i = 0; i < activeTasks.size(); i++) {
             System.out.println((i+1) + ". " + activeTasks.get(i) );
         }
-
     }
+
+    // mark a task in active tasks list as complete, given task number
+    public void markAsCompleted(int taskNumber) {
+        System.out.println("Tasks currently in to-do list:");
+        printTasks();
+        int index = taskNumber-1;
+        if (taskNumber < activeTasks.size() || taskNumber > activeTasks.size()) {
+            System.out.println("No such task in your to-do list.");
+            return;
+        }
+        activeTasks.get(index).markTaskCompleted();
+        saveToFile();
+    }
+
+    // set the priority of some task in active tasks list
+    public void setPriority(int taskNumber, String priority) {
+        System.out.println("Tasks currently in to-do list:");
+        printTasks();
+        int index = taskNumber-1;
+        if (taskNumber < activeTasks.size() || taskNumber > activeTasks.size()) {
+            System.out.println("No such task in your to-do list.");
+            return;
+        }
+        activeTasks.get(index).setTaskPriority(priority);
+        saveToFile();
+    }
+
 }

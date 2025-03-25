@@ -35,5 +35,14 @@ public class Task {
         return getTaskDescription() + (isTaskCompleted() ? " - Finished :)" : " - Incomplete :(") + " (Priority: " + getTaskPriority() + ").";
     }
 
+    public boolean equals(Object another) {
+        if (this == another) { return true; }
+        if (getClass() != another.getClass()) { return false; }
+
+        Task task = (Task) another;
+
+        return this.getTaskDescription().equals(task.getTaskDescription());
+    }
+
 
 }
