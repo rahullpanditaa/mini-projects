@@ -1,5 +1,3 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -12,7 +10,7 @@ public class ProgramLogic {
     private final String FILE_NAME = "tasks.txt";
 
     public ProgramLogic() {
-        this.activeTasks = new ArrayList<>();
+        this.activeTasks = new ArrayList<String>();
         loadTasksFromFile();
     }
 
@@ -33,7 +31,7 @@ public class ProgramLogic {
     public void saveToFile() {
         try (FileWriter writer = new FileWriter(FILE_NAME)){
             for (String t : activeTasks) {
-                writer.write(t);
+                writer.write(String.valueOf(t));
                 writer.write("\n");
             }
         } catch (IOException e) {
@@ -50,6 +48,11 @@ public class ProgramLogic {
 
         } catch (Exception e) {
             System.out.println("Unable to load previous task. Either no tasks exist or some other error.");
+        }
+        if (activeTasks.isEmpty()) {
+            System.out.println("Unable to load previous tasks. Either no tasks exists or some other error.");
+            System.out.println();
+            return;
         }
         System.out.println("Here is your to-do list:");
         printTasks();
